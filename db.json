@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": "8cda",
+      "name": "aleena",
+      "email": "aleena@gmail.com",
+      "password": "rihen123",
+      "createdAt": "2026-02-20T06:19:01.191Z"
+    },
+    {
+      "id": "91f5",
+      "name": "rihenalna",
+      "email": "rihenalna@gmail.com",
+      "password": "rihen123",
+      "createdAt": "2026-02-20T06:24:09.537Z"
+    },
+    {
+      "id": "7584",
+      "name": "sinan",
+      "email": "sinan@gmail.com",
+      "password": "sinan123",
+      "createdAt": "2026-02-20T06:38:40.426Z"
+    }
+  ]
+}
