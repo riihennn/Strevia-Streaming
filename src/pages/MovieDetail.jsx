@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetails, getTVDetails, getImageUrl } from '../utils/tmdb';
 import { addToFavorites, removeFromFavorites, isFavorite } from '../utils/favorites';
@@ -8,6 +8,12 @@ import VideoPlayer from '../components/VideoPlayer';
 function MovieDetail() {
   const { id, type } = useParams();
   const navigate = useNavigate();
+
+  // ✅ SCROLL TO TOP FIX
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showVideo, setShowVideo] = useState(false);
@@ -33,14 +39,12 @@ function MovieDetail() {
   }, [id, type]);
 
   const handlePlayClick = () => {
-    // Get trailers (try different types)
     const videos = details?.videos?.results?.filter(
       v => v.site === 'YouTube' && 
           (v.type === 'Trailer' || v.type === 'Teaser' || v.type === 'Clip')
     ) || [];
 
     if (videos.length > 0) {
-      // Prioritize official trailers
       const officialTrailer = videos.find(v => 
         v.name.toLowerCase().includes('official trailer')
       );
@@ -76,9 +80,9 @@ function MovieDetail() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black pt-20">
-        <div className="text-white text-2xl">Loading...</div>
-      </div>
+<div className="min-h-screen flex items-center justify-center bg-black">
+  <div className="w-12 h-12 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+</div>
     );
   }
 
@@ -95,7 +99,7 @@ function MovieDetail() {
 
   return (
     <div className="bg-black min-h-screen pt-16">
-      {/* Video Player Modal */}
+
       {showVideo && selectedTrailer && (
         <VideoPlayer 
           videoKey={selectedTrailer}
@@ -107,7 +111,6 @@ function MovieDetail() {
         />
       )}
 
-      {/* Rest of your code stays the same... */}
       <div 
         className="relative h-[50vh] md:h-[60vh] lg:h-[70vh] w-full"
         style={{
@@ -168,7 +171,7 @@ function MovieDetail() {
         </div>
       </div>
 
-      {/* Details Section - Keep your existing code */}
+      {/* DETAILS SECTION */}
       <div className="px-4 md:px-8 lg:px-12 py-6 md:py-10">
         
         <div className="mb-8 md:mb-12">
