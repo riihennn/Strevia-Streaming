@@ -63,9 +63,9 @@ function NewPopular() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-black pt-20">
-        <div className="text-white text-2xl">Loading...</div>
-      </div>
+<div className="min-h-screen flex items-center justify-center bg-black">
+  <div className="w-12 h-12 border-2 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+</div>
     );
   }
 
